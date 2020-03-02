@@ -83,7 +83,7 @@ class RTCClient(RTCBase):
             _allow_redirects = False
 
         _headers = {"Content-Type": self.CONTENT_XML}
-        resp = self.get(self.url + "/authenticated/identity",
+        resp = self.get(self.url + "/auth/authenticated/identity",
                         verify=False,
                         headers=_headers,
                         proxies=self.proxies,
@@ -96,7 +96,7 @@ class RTCClient(RTCBase):
         credentials = urlencode({"j_username": self.username,
                                  "j_password": self.password})
 
-        resp = self.post(self.url + "/authenticated/j_security_check",
+        resp = self.post(self.url + "/auth/authenticated/j_security_check",
                          data=credentials,
                          verify=False,
                          headers=_headers,
@@ -114,7 +114,7 @@ class RTCClient(RTCBase):
             if resp.headers.get("set-cookie") is not None:
                 _headers["Cookie"] = resp.headers.get("set-cookie")
 
-        resp = self.get(self.url + "/authenticated/identity",
+        resp = self.get(self.url + "/auth/authenticated/identity",
                         verify=False,
                         headers=_headers,
                         proxies=self.proxies,
